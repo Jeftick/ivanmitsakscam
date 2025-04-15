@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>АгроТех - Продажа сельхозтехники</title>
+    <style>
+        :root {
+            --primary-color: #4CAF50;
+            --secondary-color: #388E3C;
+            --accent-color: #8BC34A;
+            --dark-color: #2E7D32;
+            --light-color: #C8E6C9;
+            --text-color: #333;
+            --light-text: #fff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: #f9f9f9;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+            color: var(--light-text);
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: var(--light-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+        
+        nav ul li a:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+        
+        .hero {
+            background: url('https://images.unsplash.com/photo-1586771107445-d3ca888129ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            color: var(--light-text);
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--text-color);
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin: 3rem 0 2rem;
+            color: var(--dark-color);
+            font-size: 2rem;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-color);
+            margin: 0.5rem auto;
+            border-radius: 2px;
+        }
+        
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .product-card {
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .product-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+        }
+        
+        .product-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+        }
+        
+        .product-price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .product-description {
+            margin-bottom: 1.5rem;
+            color: #666;
+        }
+        
+        .features {
+            background-color: var(--light-color);
+            padding: 3rem 0;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-item {
+            text-align: center;
+            padding: 1.5rem;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: var(--light-text);
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent-color);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-column ul li a {
+            color: var(--light-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--accent-color);
+            padding-left: 5px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            color: var(--light-color);
+        }
+        
+        /* Страница с техникой */
+        .product-page {
+            padding: 2rem 0;
+        }
+        
+        .product-detail {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .product-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        
+        .main-image {
+            grid-column: span 2;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+        
+        .main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .thumbnail {
+            height: 150px;
+            overflow: hidden;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .thumbnail:hover img {
+            transform: scale(1.05);
+        }
+        
+        .product-specs h2 {
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+        }
+        
+        .price {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+        
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        
+        .specs-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .specs-table th, .specs-table td {
+            padding: 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .specs-table th {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+        }
+        
+        .contact-form {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            margin-top: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+        
+        /* О компании */
+        .about-section {
+            padding: 3rem 0;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .about-image {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .about-text h2 {
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+        }
+        
+        .about-text p {
+            margin-bottom: 1rem;
+        }
+        
+        .team {
+            margin: 3rem 0;
+        }
+        
+        .team-members {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .team-member {
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .member-image {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .member-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .member-info {
+            padding: 1.5rem;
+        }
+        
+        .member-name {
+            font-size: 1.2rem;
+            color: var(--dark-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .member-position {
+            color: var(--primary-color);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0 0.5rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .product-detail, .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .product-gallery {
+                order: -1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Главная страница -->
+    <div id="home-page">
+        <header>
+            <div class="container header-content">
+                <div class="logo">
+                    <img src="https://via.placeholder.com/50x50?text=AT" alt="АгроТех Лого">
+                    <span>АгроТех</span>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#home-page">Главная</a></li>
+                        <li><a href="#products-page">Техника</a></li>
+                        <li><a href="#about-page">О компании</a></li>
+                        <li><a href="#contact-page">Контакты</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <section class="hero">
+            <div class="container hero-content">
+                <h1>Профессиональная сельхозтехника</h1>
+                <p>Широкий выбор тракторов, комбайнов и навесного оборудования от ведущих мировых производителей с гарантией и сервисным обслуживанием</p>
+                <a href="#products-page" class="btn">Каталог техники</a>
+            </div>
+        </section>
+
+        <section class="container">
+            <h2 class="section-title">Популярные модели</h2>
+            <div class="products">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Трактор John Deere 7930">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">John Deere 7930</h3>
+                        <div class="product-price">12 500 000 ₽</div>
+                        <p class="product-description">Мощный универсальный трактор для выполнения широкого спектра сельскохозяйственных работ.</p>
+                        <a href="#john-deere-7930" class="btn">Подробнее</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Комбайн Claas Lexion 760">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Claas Lexion 760</h3>
+                        <div class="product-price">24 800 000 ₽</div>
+                        <p class="product-description">Высокопроизводительный зерноуборочный комбайн с интеллектуальной системой управления.</p>
+                        <a href="#claas-lexion-760" class="btn">Подробнее</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1581093450021-4a7360e9a9d5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Трактор МТЗ-1221">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">МТЗ-1221</h3>
+                        <div class="product-price">6 300 000 ₽</div>
+                        <p class="product-description">Надежный трактор белорусского производства с отличным соотношением цены и качества.</p>
+                        <a href="#mtz-1221" class="btn">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="container">
+                <h2 class="section-title">Почему выбирают нас</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">🚜</div>
+                        <h3 class="feature-title">Широкий ассортимент</h3>
+                        <p>Более 100 моделей техники от ведущих мировых и отечественных производителей</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🔧</div>
+                        <h3 class="feature-title">Сервисное обслуживание</h3>
+                        <p>Собственный сервисный центр с оригинальными запчастями и квалифицированными специалистами</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">💳</div>
+                        <h3 class="feature-title">Гибкие условия оплаты</h3>
+                        <p>Кредит, лизинг, рассрочка и другие удобные варианты приобретения техники</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🏆</div>
+                        <h3 class="feature-title">Опыт работы</h3>
+                        <p>Более 15 лет на рынке сельхозтехники и тысячи довольных клиентов</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-column">
+                        <h3>АгроТех</h3>
+                        <p>Продажа и сервисное обслуживание сельскохозяйственной техники с 2008 года.</p>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Меню</h3>
+                        <ul>
+                            <li><a href="#home-page">Главная</a></li>
+                            <li><a href="#products-page">Техника</a></li>
+                            <li><a href="#about-page">О компании</a></li>
+                            <li><a href="#contact-page">Контакты</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Контакты</h3>
+                        <ul>
+                            <li>г. Краснодар, ул. Сельская, 123</li>
+                            <li>+7 (861) 123-45-67</li>
+                            <li>info@agrotech.ru</li>
+                            <li>Пн-Пт: 9:00 - 18:00</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2023 АгроТех. Все права защищены.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Страница с техникой -->
+    <div id="products-page" style="display: none;">
+        <header>
+            <div class="container header-content">
+                <div class="logo">
+                    <img src="https://via.placeholder.com/50x50?text=AT" alt="АгроТех Лого">
+                    <span>АгроТех</span>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#home-page">Главная</a></li>
+                        <li><a href="#products-page" class="active">Техника</a></li>
+                        <li><a href="#about-page">О компании</a></li>
+                        <li><a href="#contact-page">Контакты</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <section class="product-page container">
+            <h1 class="section-title">Сельскохозяйственная техника</h1>
+            
+            <!-- Трактор John Deere 7930 -->
+            <div class="product-detail" id="john-deere-7930">
+                <div class="product-gallery">
+                    <div class="main-image">
+                        <img src="https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="John Deere 7930">
+                    </div>
+                    <div class="thumbnail">
+                        <img src="https://images.unsplash.com/photo-1631729371407-e7a7b61a25e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="John Deere 7930 вид сбоку">
+                    </div>
+                    <div class="thumbnail">
+                        <img src="https://images.unsplash.com/photo-1631729371272-5b1d5a2a9f5d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="John Deere 7930 кабина">
+                    </div>
+                </div>
+                <div class="product-specs">
+                    <h2>Трактор John Deere 7930</h2>
+                    <div class="price">12 500 000 ₽</div>
+                    <p>John Deere 7930 - это мощный универсальный трактор, предназначенный для выполнения широкого спектра сельскохозяйственных работ. Идеально подходит для крупных фермерских хозяйств.</p>
+                    
+                    <h3>Характеристики</h3>
+                    <table class="specs-table">
+                        <tr>
+                            <th>Мощность двигателя</th>
+                            <td>230 л.с.</td>
+                        </tr>
+                        <tr>
+                            <th>Тип двигателя</th>
+                            <td>John Deere PowerTech PSS, 6-цилиндровый</td>
+                        </tr>
+                        <tr>
+                            <th>Коробка передач</th>
+                            <td>Автоматическая AutoPowr, бесступенчатая</td>
+                        </tr>
+                        <tr>
+                            <th>Объем топливного бака</th>
+                            <td>530 л</td>
+                        </tr>
+                        <tr>
+                            <th>Гидравлическая система</th>
+                            <td>120 л/мин, давление 200 бар</td>
+                        </tr>
+                        <tr>
+                            <th>Вес</th>
+                            <td>10 200 кг</td>
+                        </tr>
+                        <tr>
+                            <th>Габариты (Д×Ш×В)</th>
+                            <td>5.8 × 2.9 × 3.2 м</td>
+                        </tr>
+                    </table>
+                    
+                    <a href="#contact-page" class="btn">Заказать</a>
+                </div>
+            </div>
+            
+            <!-- Комбайн Claas Lexion 760 -->
+            <div class="product-detail" id="claas-lexion-760">
+                <div class="product-gallery">
+                    <div class="main-image">
+                        <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Claas Lexion 760">
+                    </div>
+                    <div class="thumbnail">
+                        <img src="https://images.unsplash.com/photo-1616486338813-3d3b3b3b3b3b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Claas Lexion 760 вид сбоку">
+                    </div>
+                    <div class="thumbnail">
+                        <img src="https://images.unsplash.com/photo-1616486338814-3d3b3b3b3b3b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Claas Lexion 760 кабина">
+                    </div>
+                </div>
+                <div class="product-specs">
+                    <h2>Комбайн Claas Lexion 760</h2>
+                    <div class="price">24 800 000 ₽</div>
+                    <p>Claas Lexion 760 - это высокопроизводительный зерноуборочный комбайн с интеллектуальной системой управления. Лидер по эффективности уборки зерновых культур.</p>
+                    
+                    <h3>Характеристики</h3>
+                    <table class="specs-table">
+                        <tr>
+                            <th>Мощность двигателя</th>
+                            <td>374 л.с.</td>
+                        </tr>
+                        <tr>
+                            <th>Тип двигателя</th>
+                            <td>Mercedes-Benz OM 460 LA, 6-цилиндровый</td>
+                        </tr>
+                        <tr>
+                            <th>Ширина молотилки</th>
+                            <td>1.5 м</td>
+                        </tr>
+                        <tr>
+                            <th>Объем бункера</th>
+                            <td>12 000 л</td>
+                        </tr>
+                        <tr>
+                            <th>Производительность</th>
+                            <td>до 60 т/ч</td>
+                        </tr>
+                        <tr>
+                            <th>Вес</th>
+                            <td>16 500 кг</td>
+                        </tr>
+                        <tr>
+                            <th>Габариты (Д×Ш×В)</th>
+                            <td>9.1 × 4.2 × 4.0 м</td>
+                        </tr>
+                    </table>
+                    
+                    <a href="#contact-page" class="btn">Заказать</a>
+                </div>
+            </div>
+            
+            <!-- Трактор МТЗ-1221 -->
+            <div class="product-detail" id="mtz-1221">
+                <div class="product-gallery">
+                    <div class="main-image">
+                        <img src="https://images.unsplash.com/photo-1581093450021-4a7360e9a9d5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="МТЗ-1221">
+                    </div>
+                    <div class="thumbnail">
+                        <img src="https://images.unsplash.com/photo-1581093450022-4a7360e9a9d5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="МТЗ-1221 вид сбоку">
+                    </div>
+                    <div class="thumbnail">
+                        <img src="https://images.unsplash.com/photo-1581093450023-4a7360e9a9d5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="МТЗ-1221 кабина">
+                    </div>
+                </div>
+                <div class="product-specs">
+                    <h2>Трактор МТЗ-1221</h2>
+                    <div class="price">6 300 000 ₽</div>
+                    <p>МТЗ-1221 - это надежный трактор белорусского производства с отличным соотношением цены и качества. Подходит для средних и крупных сельхозпредприятий.</p>
+                    
+                    <h3>Характеристики</h3>
+                    <table class="specs-table">
+                        <tr>
+                            <th>Мощность двигателя</th>
+                            <td>130 л.с.</td>
+                        </tr>
+                        <tr>
+                            <th>Тип двигателя</th>
+                            <td>Д-260.2, 6-цилиндровый дизельный</td>
+                        </tr>
+                        <tr>
+                            <th>Коробка передач</th>
+                            <td>Механическая, 16 вперед / 8 назад</td>
+                        </tr>
+                        <tr>
+                            <th>Объем топливного бака</th>
+                            <td>300 л</td>
+                        </tr>
+                        <tr>
+                            <th>Гидравлическая система</th>
+                            <td>60 л/мин, давление 180 бар</td>
+                        </tr>
+                        <tr>
+                            <th>Вес</th>
+                            <td>6 800 кг</td>
+                        </tr>
+                        <tr>
+                            <th>Габариты (Д×Ш×В)</th>
+                            <td>5.2 × 2.4 × 3.1 м</td>
+                        </tr>
+                    </table>
+                    
+                    <a href="#contact-page" class="btn">Заказать</a>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-column">
+                        <h3>АгроТех</h3>
+                        <p>Продажа и сервисное обслуживание сельскохозяйственной техники с 2008 года.</p>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Меню</h3>
+                        <ul>
+                            <li><a href="#home-page">Главная</a></li>
+                            <li><a href="#products-page">Техника</a></li>
+                            <li><a href="#about-page">О компании</a></li>
+                            <li><a href="#contact-page">Контакты</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Контакты</h3>
+                        <ul>
+                            <li>г. Краснодар, ул. Сельская, 123</li>
+                            <li>+7 (861) 123-45-67</li>
+                            <li>info@agrotech.ru</li>
+                            <li>Пн-Пт: 9:00 - 18:00</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2023 АгроТех. Все права защищены.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Страница "О компании" -->
+    <div id="about-page" style="display: none;">
+        <header>
+            <div class="container header-content">
+                <div class="logo">
+                    <img src="https://via.placeholder.com/50x50?text=AT" alt="АгроТех Лого">
+                    <span>АгроТех</span>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#home-page">Главная</a></li>
+                        <li><a href="#products-page">Техника</a></li>
+                        <li><a href="#about-page" class="active">О компании</a></li>
+                        <li><a href="#contact-page">Контакты</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <section class="about-section container">
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Наша компания">
+                </div>
+                <div class="about-text">
+                    <h2>О компании АгроТех</h2>
+                    <p>АгроТех - это ведущий поставщик сельскохозяйственной техники в Южном федеральном округе. Наша компания была основана в 2008 году с целью обеспечения фермеров и сельхозпредприятий качественной и надежной техникой.</p>
+                    <p>За годы работы мы зарекомендовали себя как надежный партнер, предлагающий не только продажу техники, но и полный комплекс сервисных услуг, включая гарантийное и постгарантийное обслуживание, поставку запчастей и обучение операторов.</p>
+                    <p>Мы сотрудничаем с ведущими мировыми производителями сельхозтехники, такими как John Deere, Claas, Case IH, New Holland, МТЗ и другими, что позволяет нам предлагать клиентам лучшие решения для любых задач.</p>
+                </div>
+            </div>
+
+            <div class="about-text" style="margin-top: 3rem;">
+                <h2>Наши преимущества</h2>
+                <p><strong>Широкий ассортимент:</strong> В нашем каталоге представлено более 100 моделей тракторов, комбайнов и навесного оборудования от ведущих производителей.</p>
+                <p><strong>Профессиональные консультации:</strong> Наши специалисты помогут подобрать технику, оптимально соответствующую вашим потребностям и бюджету.</p>
+                <p><strong>Сервисное обслуживание:</strong> Собственный сервисный центр с современным оборудованием и квалифицированными механиками.</p>
+                <p><strong>Гибкие условия оплаты:</strong> Мы предлагаем различные варианты финансирования, включая кредит, лизинг и рассрочку.</p>
+                <p><strong>Доставка по всей России:</strong> Организуем транспортировку техники в любой регион страны.</p>
+            </div>
+
+            <div class="team">
+                <h2 class="section-title">Наша команда</h2>
+                <div class="team-members">
+                    <div class="team-member">
+                        <div class="member-image">
+                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Иван Петров">
+                        </div>
+                        <div class="member-info">
+                            <h3 class="member-name">Иван Петров</h3>
+                            <p class="member-position">Генеральный директор</p>
+                            <p>Опыт работы в сельхозмашиностроении - более 20 лет. Основатель компании АгроТех.</p>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-image">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Елена Смирнова">
+                        </div>
+                        <div class="member-info">
+                            <h3 class="member-name">Елена Смирнова</h3>
+                            <p class="member-position">Технический директор</p>
+                            <p>Специалист по сельхозтехнике с 15-летним стажем. Курирует сервисное обслуживание.</p>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-image">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Алексей Козлов">
+                        </div>
+                        <div class="member-info">
+                            <h3 class="member-name">Алексей Козлов</h3>
+                            <p class="member-position">Менеджер по продажам</p>
+                            <p>Поможет подобрать оптимальную технику для вашего хозяйства и оформить покупку.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-column">
+                        <h3>АгроТех</h3>
+                        <p>Продажа и сервисное обслуживание сельскохозяйственной техники с 2008 года.</p>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Меню</h3>
+                        <ul>
+                            <li><a href="#home-page">Главная</a></li>
+                            <li><a href="#products-page">Техника</a></li>
+                            <li><a href="#about-page">О компании</a></li>
+                            <li><a href="#contact-page">Контакты</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Контакты</h3>
+                        <ul>
+                            <li>г. Краснодар, ул. Сельская, 123</li>
+                            <li>+7 (861) 123-45-67</li>
+                            <li>info@agrotech.ru</li>
+                            <li>Пн-Пт: 9:00 - 18:00</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2023 АгроТех. Все права защищены.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Страница "Контакты" -->
+    <div id="contact-page" style="display: none;">
+        <header>
+            <div class="container header-content">
+                <div class="logo">
+                    <img src="https://via.placeholder.com/50x50?text=AT" alt="АгроТех Лого">
+                    <span>АгроТех</span>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#home-page">Главная</a></li>
+                        <li><a href="#products-page">Техника</a></li>
+                        <li><a href="#about-page">О компании</a></li>
+                        <li><a href="#contact-page" class="active">Контакты</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <section class="container" style="padding: 3rem 0;">
+            <h1 class="section-title">Контакты</h1>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 3rem;">
+                <div>
+                    <h2 style="color: var(--dark-color); margin-bottom: 1rem;">Наши контакты</h2>
+                    <p><strong>Адрес:</strong> г. Краснодар, ул. Сельская, 123</p>
+                    <p><strong>Телефон:</strong> +7 (861) 123-45-67</p>
+                    <p><strong>Email:</strong> info@agrotech.ru</p>
+                    <p><strong>Режим работы:</strong> Пн-Пт: 9:00 - 18:00</p>
+                    
+                    <div style="margin-top: 2rem;">
+                        <h3 style="color: var(--dark-color); margin-bottom: 1rem;">Мы в соцсетях</h3>
+                        <div style="display: flex; gap: 1rem;">
+                            <a href="#" style="color: var(--primary-color); font-size: 1.5rem;">📱</a>
+                            <a href="#" style="color: var(--primary-color); font-size: 1.5rem;">📘</a>
+                            <a href="#" style="color: var(--primary-color); font-size: 1.5rem;">📸</a>
+                            <a href="#" style="color: var(--primary-color); font-size: 1.5rem;">🎥</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h2 style="color: var(--dark-color); margin-bottom: 1rem;">Как добраться</h2>
+                    <div style="height: 300px; background-color: #eee; border-radius: 8px; overflow: hidden;">
+                        <!-- Здесь будет карта -->
+                        <img src="https://maps.googleapis.com/maps/api/staticmap?center=45.035470,38.975313&zoom=13&size=600x300&maptype=roadmap&markers=color:red%7C45.035470,38.975313&key=YOUR_API_KEY" alt="Карта" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-form">
+                <h2 style="color: var(--dark-color); margin-bottom: 1.5rem; text-align: center;">Оставьте заявку</h2>
+                <form>
+                    <div class="form-group">
+                        <label for="name">Ваше имя</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Телефон</label>
+                        <input type="tel" id="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Сообщение</label>
+                        <textarea id="message"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-block">Отправить</button>
+                </form>
+            </div>
+        </section>
+
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-column">
+                        <h3>АгроТех</h3>
+                        <p>Продажа и сервисное обслуживание сельскохозяйственной техники с 2008 года.</p>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Меню</h3>
+                        <ul>
+                            <li><a href="#home-page">Главная</a></li>
+                            <li><a href="#products-page">Техника</a></li>
+                            <li><a href="#about-page">О компании</a></li>
+                            <li><a href="#contact-page">Контакты</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Контакты</h3>
+                        <ul>
+                            <li>г. Краснодар, ул. Сельская, 123</li>
+                            <li>+7 (861) 123-45-67</li>
+                            <li>info@agrotech.ru</li>
+                            <li>Пн-Пт: 9:00 - 18:00</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2023 АгроТех. Все права защищены.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Простая навигация между страницами
+        document.addEventListener('DOMContentLoaded', function() {
+            // Показываем главную страницу по умолчанию
+            showPage('home-page');
+            
+            // Обработка кликов по ссылкам
+            document.querySelectorAll('a[href^="#"]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const pageId = this.getAttribute('href').substring(1);
+                    showPage(pageId);
+                    window.scrollTo(0, 0);
+                });
+            });
+        });
+        
+        function showPage(pageId) {
+            // Скрываем все страницы
+            document.querySelectorAll('div[id$="-page"]').forEach(page => {
+                page.style.display = 'none';
+            });
+            
+            // Показываем выбранную страницу
+            document.getElementById(pageId).style.display = 'block';
+            
+            // Обновляем активную ссылку в навигации
+            document.querySelectorAll('nav a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${pageId}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
